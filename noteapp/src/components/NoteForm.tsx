@@ -8,9 +8,7 @@ interface Note {
 
 interface Props {
   formValue: Note;
-
   setFormValue: React.Dispatch<React.SetStateAction<Note>>;
-
   setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
 }
 
