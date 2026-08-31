@@ -1,21 +1,25 @@
 
 import React from "react";
 
-interface Props {
-  formValue: {
-    title: string;
-    description: string;
-  };
-
-  setFormValue: React.Dispatch<
-    React.SetStateAction<{
-      title: string;
-      description: string;
-    }>
-  >;
+interface Note {
+  title: string;
+  description: string;
 }
 
-const NoteForm = ({ formValue, setFormValue }: Props) => {
+interface Props {
+  formValue: Note;
+
+  setFormValue: React.Dispatch<React.SetStateAction<Note>>;
+
+  setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
+}
+
+const NoteForm = ({
+  formValue,
+  setFormValue,
+  setNotes,
+}: Props) => {
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -25,11 +29,29 @@ const NoteForm = ({ formValue, setFormValue }: Props) => {
     }));
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setNotes((prev) => [...prev, formValue]);
+
+    setFormValue({
+      title: "",
+      description: "",
+    });
+  };
+
   return (
     <div className="max-w-md mx-auto mt-10 p-6 border rounded-lg shadow">
-      <h2 className="text-2xl font-bold mb-5">Create Note</h2>
 
-      <form className="space-y-4">
+      <h2 className="text-2xl font-bold mb-5">
+        Create Note
+      </h2>
+
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-4"
+      >
+
         {/* Title */}
         <div>
           <label className="block mb-2 font-medium">
@@ -62,12 +84,14 @@ const NoteForm = ({ formValue, setFormValue }: Props) => {
           />
         </div>
 
+        {/* Button */}
         <button
           type="submit"
           className="w-full py-2 rounded-md font-medium border"
         >
           Add Note
         </button>
+
       </form>
     </div>
   );
