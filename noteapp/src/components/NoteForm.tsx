@@ -1,0 +1,49 @@
+import React from 'react'
+
+interface Props {}
+
+const NoteForm = (props: Props) => {
+  return (
+    <div className="max-w-md mx-auto mt-10 p-6 border rounded-lg shadow">
+      <h2 className="text-2xl font-bold mb-5">Create Note</h2>
+
+      <form className="space-y-4">
+        {/* Title */}
+        <div>
+          <label className="block mb-2 font-medium">
+            Title
+          </label>
+
+          <input
+            type="text"
+            placeholder="Enter title"
+            className="w-full border rounded-md px-3 py-2 outline-none focus:ring-2"
+          />
+        </div>
+
+        {/* Description */}
+        <div>
+          <label className="block mb-2 font-medium">
+            Description
+          </label>
+
+          <textarea
+            placeholder="Enter description"
+            rows={5}
+            className="w-full border rounded-md px-3 py-2 outline-none focus:ring-2"
+          />
+        </div>
+
+        {/* Button */}
+        <button
+          type="submit"
+          className="w-full py-2 rounded-md font-medium border"
+        >
+          Add Note
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default NoteForm;
